@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Kitchen and Pantry app icon">
+  <defs>
+    <linearGradient id="kapGrad512" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2e85ea"/>
+      <stop offset="100%" stop-color="#4d9fff"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="#0f131a"/>
+  <rect x="56" y="56" width="400" height="400" rx="74" fill="url(#kapGrad512)"/>
+  <path d="M152 366V146h49v87l83-87h63l-90 93 96 127h-60l-68-92-24 25v67H152z" fill="#0f131a"/>
+</svg>

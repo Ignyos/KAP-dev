@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kitchen & Pantry</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/icon-192.svg" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.svg" />
+  <link rel="stylesheet" href="./styles.css?v=2026-07-07-21-43" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <div id="app-root" class="app-root">
+    <header class="app-header">
+      <div class="header-container">
+        <h1 class="app-title">Kitchen & Pantry</h1>
+        <div class="header-menu">
+          <button
+            type="button"
+            class="header-menu-button"
+            id="menu-button"
+            title="Menu"
+            aria-label="Open menu"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="header-menu-list"
+          >&#9776;</button>
+          <div class="header-menu-list" id="header-menu-list" role="menu" hidden>
+            <button type="button" class="header-menu-item" id="menu-install-button" role="menuitem">Install App</button>
+            <button type="button" class="header-menu-item" id="menu-about-button" role="menuitem">About</button>
+            <button type="button" class="header-menu-item" id="menu-uom-button" role="menuitem">Units of Measure</button>
+            <button type="button" class="header-menu-item" id="menu-settings-button" role="menuitem">Settings</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tab-nav" aria-label="Primary">
+      <div id="main-tabs" class="tab-list" role="tablist" aria-label="Kitchen and Pantry Sections"></div>
+    </nav>
+
+    <main class="page-main" id="page-main">
+      <section id="main-content" class="main-content" aria-live="polite"></section>
+      <section id="settings-content" class="settings-content" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <template id="main-tab-template">
+    <button type="button" class="tab-button" role="tab" aria-selected="false">
+      <span class="tab-label"></span>
+      <span class="tab-inline-action" aria-hidden="true"></span>
+    </button>
+  </template>
+
+  <template id="main-content-shell-template">
+    <section class="content-shell" role="region">
+      <div class="empty-state-card">
+        <p class="empty-state-text"></p>
+      </div>
+      <div class="record-list" data-record-list></div>
+    </section>
+  </template>
+
+  <template id="list-record-row-template">
+    <button type="button" class="record-row">
+      <span class="record-name"></span>
+    </button>
+  </template>
+
+  <template id="detail-shell-template">
+    <section class="detail-shell" role="region">
+      <div class="detail-header">
+        <button type="button" class="detail-back-button">&#8592; Home</button>
+        <h2 class="detail-title"></h2>
+        <div class="detail-actions"></div>
+      </div>
+      <div class="detail-item-list" data-detail-item-list></div>
+      <div class="empty-state-card">
+        <p class="empty-state-text"></p>
+      </div>
+    </section>
+  </template>
+
+  <template id="detail-item-row-template">
+    <div class="detail-item-row">
+      <span class="detail-item-qty-pill"></span>
+      <div class="detail-item-content">
+        <div class="detail-item-name"></div>
+        <div class="detail-item-meta"></div>
+      </div>
+      <div class="detail-item-actions"></div>
+    </div>
+  </template>
+
+  <template id="settings-toggle-template">
+    <div class="settings-toggle-row">
+      <label class="settings-toggle-label"></label>
+      <button type="button" class="settings-toggle-switch settings-toggle-switch--off" role="switch" aria-checked="false"></button>
+    </div>
+  </template>
+
+  <template id="modal-template">
+    <div class="modal-overlay">
+      <div class="modal-card" role="dialog" aria-modal="true">
+        <div class="modal-footer">
+          <button type="button" class="modal-button modal-button--secondary modal-cancel-button">Cancel</button>
+          <h2 class="modal-title"></h2>
+          <button type="button" class="modal-button modal-confirm-button"></button>
+        </div>
+        <div class="modal-body"></div>
+      </div>
+    </div>
+  </template>
+
+  <script src="./shared/ids.js?v=2026-07-07-21-43"></script>
+  <script src="./app-config.js?v=2026-07-07-21-43"></script>
+  <script src="./shared/settings.js?v=2026-07-07-21-43"></script>
+  <script src="./data/stores.js?v=2026-07-07-21-43"></script>
+  <script src="./data/db.js?v=2026-07-07-21-43"></script>
+  <script src="./ui/ui.js?v=2026-07-07-21-43"></script>
+  <script src="./features/items/items-service.js?v=2026-07-07-21-43"></script>
+  <script src="./features/categories/categories-service.js?v=2026-07-07-21-43"></script>
+  <script src="./shared/item-discovery.js?v=2026-07-07-21-43"></script>
+  <script src="./shared/item-entry-rules.js?v=2026-07-07-21-43"></script>
+  <script src="./features/lists/lists-service.js?v=2026-07-07-21-43"></script>
+  <script src="./features/lists/lists-page.js?v=2026-07-07-21-43"></script>
+  <script src="./features/templates/templates-service.js?v=2026-07-07-21-43"></script>
+  <script src="./features/templates/templates-page.js?v=2026-07-07-21-43"></script>
+  <script src="./features/recipes/recipes-service.js?v=2026-07-07-21-43"></script>
+  <script src="./features/recipes/recipes-page.js?v=2026-07-07-21-43"></script>
+  <script src="./features/uom/uom-page.js?v=2026-07-07-21-43"></script>
+  <script src="./features/settings/import-export-service.js?v=2026-07-07-21-43"></script>
+  <script src="./features/settings/google-drive-sync-remote-adapter.js?v=2026-07-07-21-43"></script>
+  <script src="./features/settings/google-drive-sync-google-adapter.js?v=2026-07-07-21-43"></script>
+  <script src="./features/settings/google-drive-sync-service.js?v=2026-07-07-21-43"></script>
+  <script src="./features/settings/settings-page.js?v=2026-07-07-21-43"></script>
+  <script src="./features/main/main-page.js?v=2026-07-07-21-43"></script>
+  <script src="./app-router.js?v=2026-07-07-21-43"></script>
+  <script src="./app-init.js?v=2026-07-07-21-43"></script>
+  <script src="./main.js?v=2026-07-07-21-43"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
